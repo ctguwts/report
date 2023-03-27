@@ -9,14 +9,8 @@ export const CertificateUploader: React.FC = observer((props) => {
   const form = useForm();
 
   const { scene_type, addr_type, influenceArea } = form?.getFormState().values;
-  console.log(
-    "我拿到的form表单的值是什么",
-    scene_type,
-    addr_type,
-    influenceArea
-  );
   return (
-    <>
+    <div style={{ width: "1000px" }}>
       {scene_type != undefined &&
       addr_type != undefined &&
       influenceArea != undefined ? (
@@ -36,6 +30,6 @@ export const CertificateUploader: React.FC = observer((props) => {
       ) : (
         <div>请先填写报备原因、受影响地区类型、受影响地区，再上传凭证</div>
       )}
-    </>
+    </div>
   );
 });

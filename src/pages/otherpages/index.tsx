@@ -1,35 +1,52 @@
-import { observable, autorun } from "@formily/reactive";
-import React from "react";
+import React, { useState } from "react";
+import { Form, Input, Button } from "antd";
+import { observer } from "mobx-react-lite";
+import { useLocalObservable } from "mobx-react";
 
-function testObservable2() {
-  const obs = observable({
-    aa: {
-      bb: 123,
-    },
-    cc: {
-      dd: 123,
-    },
-    ee: {
-      ff: 123,
-    },
-    gg: {
-      hh: 123,
-    },
-  });
+const MYForm = observer(() => {
+  const [form] = Form.useForm();
+  const [submitting, setSubmitting] = useState(false);
 
-  autorun(() => {
-    // 只是倾听aa字段的话，那么子字段的变化是不会触发的
-    // 因为obs.aa的引用没有变化
-    // 所以这里只触发1次
-    console.log("object3", obs.aa.bb);
-  });
+  const store = useLocalObservable(() => ({
+    firstName: "",
+    lastName: "",
+    // fullName: computed(() => `${store.firstName} ${store.lastName}`),
+  }));
 
-  obs.aa.bb = 444;
-}
+  const handleSubmit = async (values) => {
+    setSubmitting(true);
+    try {
+      console.log("values是什么", values);
+      // perform form submission with values
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
-const Test = () => {
-  testObservable2();
-  return <div>hell</div>;
-};
+  return (
+    <Form form={form} onFinish={handleSubmit}>
+      <Form.Item name="firstName" label="First Name">
+        <Input
+          value={store.firstName}
+          onChange={(e) => (store.firstName = e.target.value)}
+        />
+      </Form.Item>
+      <Form.Item name="lastName" label="Last Name">
+        <Input
+          value={store.lastName}
+          // onChange={(e) => (store.lastName = e.target.value)}
+        />
+      </Form.Item>
 
-export default Test;
+      <Form.Item>
+        <Button type="primary" htmlType="submit" loading={submitting}>
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+});
+
+export default MYForm;

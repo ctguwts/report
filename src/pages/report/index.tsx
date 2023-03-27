@@ -34,13 +34,6 @@ const normalForm = createForm({
           componentProps.options = addrEnums;
         });
       }
-
-      if (value !== undefined) {
-        normalForm.setFieldState("influenceArea", (state) => {
-          const { componentProps } = state;
-          componentProps.disable = false;
-        });
-      }
     });
   },
 });
@@ -67,27 +60,8 @@ const SchemaField = createSchemaField({
 const normalSchema = {
   type: "object",
   properties: {
-    username: {
-      type: "string",
-      title: "用户名",
-      required: true,
-      "x-decorator": "FormItem",
-      "x-component": "Input",
-      "x-component-props": {
-        prefix: "{{icon('UserOutlined')}}",
-      },
-    },
-    password: {
-      type: "string",
-      title: "密码",
-      required: true,
-      "x-decorator": "FormItem",
-      "x-component": "Password",
-      "x-component-props": {
-        prefix: "{{icon('LockOutlined')}}",
-      },
-    },
     scene_type: {
+      required: true,
       type: "string",
       title: "报备原因",
       "x-decorator": "FormItem",
@@ -123,7 +97,6 @@ const normalSchema = {
       //     },
       //   },
       // },
-      "x-pattern": "disabled",
     },
     certificateList: {
       type: "object",
@@ -167,7 +140,7 @@ export default () => {
       >
         <SchemaField schema={normalSchema} />
         <Submit block size="large">
-          登录
+          提交报备资料
         </Submit>
       </Form>
     </div>

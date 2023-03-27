@@ -25,7 +25,6 @@ export const InfluenceAreaType: React.FC = (props) => {
       onChange(val?.target?.value);
     }
   };
-
   return (
     <Radio.Group
       value={value}
