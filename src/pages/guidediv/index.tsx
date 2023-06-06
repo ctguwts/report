@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
-import { getStartGuide } from "../../component/guide/index.tsx";
+import { getStartGuide } from "../../component/guide/index";
 
 const Guidediv = () => {
   getStartGuide();

@@ -10,13 +10,15 @@ import {
   Select,
   Radio,
 } from "@formily/antd";
-import { reasonEnums, Scene, addrEnums, addrLimitEnums } from "./const.ts";
+import { reasonEnums, Scene, addrEnums, addrLimitEnums } from "./const";
 import * as ICONS from "@ant-design/icons";
-import { InfluenceAreaType } from "./components/InfluenceAreaType/index.tsx";
+import { InfluenceAreaType } from "./components/InfluenceAreaType/index";
 import { Modal } from "antd";
-import { SceneTypeSelector } from "./components/SceneTypeSelector/index.tsx";
-import { Address } from "./components/Address/index.tsx";
-import { CertificateUploader } from "./components/CertificateUploader/index.tsx";
+import { SceneTypeSelector } from "./components/SceneTypeSelector/index";
+import { Address } from "./components/Address/index";
+import { CertificateUploader } from "./components/CertificateUploader/index";
+import styles from "./styles.module.scss";
+import classnames from "classnames";
 
 const normalForm = createForm({
   validateFirst: true,
@@ -123,26 +125,40 @@ const submit = (value) => {
 };
 
 export default () => {
+  let userID = Math.ceil(Math.random() * 10);
+
+  let mode = userID % 2 === 1 ? true : false;
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        background: "#eee",
-        padding: "40px 0",
-      }}
-    >
-      <Form
-        form={normalForm}
-        layout="vertical"
-        size="large"
-        onAutoSubmit={submit}
+    <>
+      <div
+        className={classnames({
+          [styles.bannerContainerDark]: mode,
+          [styles.bannerContainerLight]: !mode,
+        })}
       >
-        <SchemaField schema={normalSchema} />
-        <Submit block size="large">
-          提交报备资料
-        </Submit>
-      </Form>
-    </div>
+        <div className={styles.item}>超时免扣信用积分</div>
+        <div className={styles.item}>超时免赔付</div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          background: "#eee",
+          padding: "40px 0",
+        }}
+      >
+        <Form
+          form={normalForm}
+          layout="vertical"
+          size="large"
+          onAutoSubmit={submit}
+        >
+          <SchemaField schema={normalSchema} />
+          <Submit block size="large">
+            提交报备资料
+          </Submit>
+        </Form>
+      </div>
+    </>
   );
 };

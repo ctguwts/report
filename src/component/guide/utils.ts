@@ -9,6 +9,18 @@ export const getGuideWrapperDom = () => {
 };
 
 export const getDomByGuideKey = (nameKey, key) => {
-  console.log(`${nameKey}=${key}`);
-  document.querySelector(`[${nameKey}=${key}]`);
+  return document.querySelector(`[${nameKey}=${key}]`);
+};
+
+export const getOffset = (element) => {
+  const docEl = document.documentElement;
+  const scrollTop = docEl.scrollTop;
+  const scrollLeft = docEl.scrollLeft;
+  const rec = element.getBoundingClientRect();
+  return {
+    top: rec.top + scrollTop,
+    width: rec.width,
+    height: rec.height,
+    left: rec.left + scrollLeft,
+  };
 };

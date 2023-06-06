@@ -1,7 +1,159 @@
 .normalWrapper {
-  background-color: red;
+  position: absolute;
+
+  .normalActiveWrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 4px;
+    border: 1px white dashed;
+    transition: all 3s ease-in-out;
+  }
+
+  .normalConnectWrapper {
+    position: absolute;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+
+    .normalRoundOuter {
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .normalRoundInner {
+        background-color: white;
+        border-radius: 50%;
+        width: 6px;
+        height: 6px;
+      }
+    }
+
+    .normalConnectBar {
+      background-color: white;
+      width: 1px;
+      height: 22px;
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .normalContentWrapper {
+    background-color: white;
+    box-shadow: 0px 2px 6px rgba(0, 23, 54, 0.05);
+    border-radius: 4px;
+    padding: 24px;
+    position: absolute;
+
+    .normalTitle {
+      color: #12141a;
+      font-size: 16px;
+      font-weight: bolder;
+      line-height: 23px;
+      display: flex;
+    }
+
+    .normalContent {
+      font-size: 14px;
+      line-height: 20px;
+      color: #12141a;
+      margin-top: 12px;
+    }
+  }
+}
+
+.normalBottom {
+  .normalConnectWrapper {
+    top: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .normalContentWrapper {
+    top: calc(100% + 34px);
+  }
+}
+
+.normalTop {
+  .normalConnectWrapper {
+    top: -34px;
+    left: 50%;
+    transform: rotate(180deg) translateX(-50%);
+  }
+
+  .normalContentWrapper {
+    bottom: calc(100% + 34px);
+  }
+}
+
+.normalLeft {
+  .normalConnectWrapper {
+    top: calc(50% - 16px);
+    left: -24px;
+    transform: rotate(90deg);
+  }
+
+  .normalContentWrapper {
+    right: calc(100% + 34px);
+  }
+}
+
+.normalRight {
+  .normalConnectWrapper {
+    left: calc(100% + 12px);
+    transform: rotate(-90deg);
+    top: calc(50% - 16px);
+  }
+
+  .normalContentWrapper {
+    left: calc(100% + 34px);
+  }
 }
 
 .normalPlacement {
-  background-color: green;
+  // background-color: green;
+}
+
+.normalBottom {
+  .normalAlignLeft {
+    left: 0;
+  }
+
+  .normalAlignAuto {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .normalAlignRight {
+    right: 0;
+  }
+}
+
+.normalTop {
+  .normalAlignAuto {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.normalLeft {
+  .normalAlignAuto {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.normalRight {
+  .normalAlignAuto {
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }

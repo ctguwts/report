@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { getDomByGuideKey } from "../../utils.ts";
+import React, { useEffect, useState } from "react";
+import { getDomByGuideKey } from "../../utils";
 
-import NodrmalGuide from "./index.tsx";
-import Mask from "../mask/index.tsx";
+import NodrmalGuide from "./index";
+import Mask from "../mask/index";
 
 const NormalGuideView = ({ options }) => {
   const {
@@ -12,21 +12,28 @@ const NormalGuideView = ({ options }) => {
     steps: stepConfig,
   } = options;
 
-  const [steps, setSteps] = useState();
+  const [steps, setSteps] = useState<any[]>();
 
   const collectDoms = () => {
-    const finalSteps = [];
+    const finalSteps: any[] = [];
     stepConfig.forEach((option) => {
-      getDomByGuideKey(nameKey, option.key);
-      console.log("当前的option是什么", option);
+      const dom = getDomByGuideKey(nameKey, option.key);
+      finalSteps.push({
+        ...option,
+        dom,
+      });
     });
+    setSteps(finalSteps);
   };
 
-  collectDoms();
+  useEffect(() => {
+    collectDoms();
+  }, []);
+
   return (
     <div>
       <Mask zIndex={zIndex} />
-      <NodrmalGuide />
+      <NodrmalGuide {...options} steps={steps} />
     </div>
   );
 };
